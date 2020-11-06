@@ -1,0 +1,70 @@
+
+<html>
+<head>
+    <style>
+        div.inline { float:left; text-align: center; }
+        .clearBoth { clear:both; }
+    </style>
+<script type="text/javascript">
+
+function startZegar()
+{
+ustawCzas();
+setInterval('ustawCzas()', 500);
+}
+
+function zegar(x)
+{
+var h, m, s, now = new Date();
+var date;
+with(now){
+setTime(getTime() + (x*3600000));
+g = getUTCHours();
+m= getUTCMinutes();
+date = ustawDate(now);
+}
+var time = date + " ";
+time+= " " + (g<10?"0":"")+g;
+time+=(m<10?":0":":")+m;
+return time;
+}
+
+function ustawCzas(){
+    function czas(id, x){
+        document.getElementById(id).value = zegar(x);
+    }
+    czas('lbn', 1);
+    czas('nyc', -5);
+    czas('syd', 10);
+}
+
+function ustawDate(t)
+{
+    var day = t.getDate();
+    var month = t.getMonth()+1;
+    
+    
+    return day + "-" + month ;
+}
+
+</script>
+</head>
+<body onload="startZegar()">
+    <div class="inline"> 
+<h1 style="color:green">  Lublin </h1>
+<textarea class="inline" style="resize:none" id="lbn"></textarea>
+</div>
+<div class="inline">
+<h1 style="color:blue"> New York </h1>
+<textarea style="resize:none " id="nyc"></textarea>
+</div>
+<div class="inline">
+<h1 style="color:orange"> Sidney </h1>
+<textarea style="resize:none " id="syd" ></textarea>
+</div>
+</body>
+
+
+
+
+</html>
